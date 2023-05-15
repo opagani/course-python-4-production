@@ -113,6 +113,16 @@ class DataReader:
         """
     ######################################## YOUR CODE HERE ##################################################
 
+        # - read the file
+        # - parse each row
+        # - create a dictionary
+        # - yeild the dicrionary
+
+        for row in open(self._fp, 'r'):
+            values = row.strip('\n').split(self._sep)
+            result = {key: value for key, value in zip(self._col_names, values)}
+            yield result
+            
     ######################################## YOUR CODE HERE ##################################################
 
     def get_file_path(self):
@@ -121,3 +131,21 @@ class DataReader:
     def get_column_names(self):
         return self._col_names
 
+if __name__ == '__main__':
+
+    cols = [
+        'StockCode',
+        'Description',
+        'UnitPrice',
+        'Quantity', 
+        'TotalPrice',
+        'Country'
+    ]
+    
+    dr = DataReader('/Users/opagani/projects/course-python-4-production/data/tst/2015.csv', ',', cols)  # noqa: E501
+    
+    dr_gen = (row for row in dr)
+    
+    print(next(dr_gen))
+    print(next(dr_gen))
+    print(next(dr_gen))

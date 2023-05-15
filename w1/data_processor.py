@@ -80,4 +80,25 @@ class DataProcessor:
         """
         ######################################## YOUR CODE HERE ##################################################
 
+        # init a data reader
+        dr = (row for row in self.data_reader)
+        
+        # skip the first row of column names
+        next(dr)
+        
+        # iterate over rows and aggregate target column
+        agg_result = 0
+        for row in dr:
+            agg_result += self.to_float(row[column_name])
+            
+        return agg_result
+        
         ######################################## YOUR CODE HERE ##################################################
+
+if __name__ == '__main__':
+    
+    dp = DataProcessor('/Users/opagani/projects/course-python-4-production/data/tst/2015.csv')
+    
+    result = dp.aggregate('TotalPrice')
+    
+    print(result)
