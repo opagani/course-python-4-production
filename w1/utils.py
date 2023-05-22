@@ -116,7 +116,7 @@ class DataReader:
         # - read the file
         # - parse each row
         # - create a dictionary
-        # - yeild the dicrionary
+        # - yeild the dictionary
 
         for row in open(self._fp, 'r'):
             values = row.strip('\n').split(self._sep)
